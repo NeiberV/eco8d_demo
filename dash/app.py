@@ -55,6 +55,9 @@ SQLITE_PATH = ROOT / "eco8d.sqlite3"
 CARPETA_INFORMES_8D = ROOT / "informes_8d"
 CARPETA_INFORMES_8D.mkdir(exist_ok=True)
 
+
+
+
 # ─────────────────────────────────────────────
 # Pequeña protección con contraseña (demo)
 # ─────────────────────────────────────────────
@@ -127,6 +130,14 @@ if st.sidebar.button(
 # ──────────────────────────────────────────────────────────────
 LOGO_PATH = "assets/logoECOcero.jpg"   # Ajusta si tu logo está en otro sitio
 
+# Diccionarios globales para las figuras y sus textos en el informe
+FIGS_FOR_REPORT = {}
+FIGS_EXPLAIN_FOR_REPORT = {}
+# ──────────────────────────────────────────────────────────────
+# LOGO PARA EL INFORME AUTOMÁTICO
+# ──────────────────────────────────────────────────────────────
+LOGO_PATH = "assets/logoECOcero.jpg"   # Ajusta si tu logo está en otro sitio
+
 def mostrar_fig_con_lectura(fig_key: str, titulo: str, fig, resumen: str):
     """
     Renderiza un gráfico con su 'lectura automática' debajo
@@ -140,12 +151,10 @@ def mostrar_fig_con_lectura(fig_key: str, titulo: str, fig, resumen: str):
     st.markdown(f"**📝 Lectura automática – {titulo}**")
     st.write(resumen)
 
-    # Registrar para informe Word (modo seguro)
-    if "FIGS_FOR_REPORT" in globals():
-        FIGS_FOR_REPORT[fig_key] = fig
-    if "FIGS_EXPLAIN_FOR_REPORT" in globals():
-        FIGS_EXPLAIN_FOR_REPORT[fig_key] = resumen
-
+    # Registrar para informe Word
+    global FIGS_FOR_REPORT, FIGS_EXPLAIN_FOR_REPORT
+    FIGS_FOR_REPORT[fig_key] = fig
+    FIGS_EXPLAIN_FOR_REPORT[fig_key] = resumen
 # ──────────────────────────────────────────────────────────────
 # EXCEL MAESTRO — RUTAS Y HOJAS
 # ──────────────────────────────────────────────────────────────
@@ -866,6 +875,9 @@ def construir_docx_informe(cuerpo_informe: str, lista_graficos_selec):
     - Los gráficos seleccionados (lista_graficos_selec),
       usando FIGS_FOR_REPORT y FIGS_EXPLAIN_FOR_REPORT.
     """
+    # Usar las variables globales donde hemos ido guardando los gráficos
+    global FIGS_FOR_REPORT, FIGS_EXPLAIN_FOR_REPORT, LOGO_PATH
+
     doc = Document()
 
     # ─────────────────────────────
@@ -975,6 +987,7 @@ def construir_docx_informe(cuerpo_informe: str, lista_graficos_selec):
     doc.save(buffer)
     buffer.seek(0)
     return buffer
+
 
 def generar_lectura_matriz_riesgo_prioridad(pivot_riesgo: pd.DataFrame) -> str:
     """
