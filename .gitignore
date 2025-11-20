@@ -1,6 +1,7 @@
 venv/
 __pycache__/
-*.__pycache__*.pyo
+*.__pycache__
+*.pyo
 *.pyd
 .env
 .streamlit/
