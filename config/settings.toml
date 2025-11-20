@@ -1,0 +1,47 @@
+# ===============================
+# ECO8D (nuevo proyecto) - Settings
+# ===============================
+
+[excel]
+# Ruta absoluta al archivo Maestro Excel:
+# ⚠️ IMPORTANTE: ESTA RUTA DEBE EXISTIR EN EL SERVIDOR O EN TU PC LOCAL
+path = "data/BASE DE DATOS GENERAL.xlsx"
+
+[sheets]
+# Nombres exactos de las hojas en tu archivo:
+bd8d      = "BDCAPAINFORME8D"
+bdcapa    = "BDCAPA"
+formato8d = "FORMATO8D"
+datos     = "Datos"
+
+[bd8d]
+# Encabezados en fila 2 (A2..AN2) → pandas header_row = 1 (0-index)
+header_row = 1
+
+[bdcapa]
+# Encabezados en fila 2 (A2..S2) → pandas header_row = 1
+header_row = 1
+
+[formato8d]
+# Etiquetas en la columna A (A5..A51); valores en la B
+labels_start_row = 5
+
+# Filas a omitir (por tu especificación: A14, A21, A29, A34, A41, A46, A48)
+labels_ignore_rows = [14, 21, 29, 34, 41, 46, 48]
+
+[database]
+# ===============================
+# MOTOR DE BASE DE DATOS
+# Cambiar SOLO esta línea si te mudas a un servidor:
+#
+#   - Local con SQLite:
+#         url = "sqlite:///eco8d.sqlite3"
+#
+#   - PostgreSQL (Railway/Azure/Render):
+#         url = "postgresql+psycopg2://usuario:password@host:puerto/database"
+#
+#   - MySQL/MariaDB:
+#         url = "mysql+pymysql://usuario:password@host:puerto/database"
+# ===============================
+
+url = "sqlite:///eco8d.sqlite3"
