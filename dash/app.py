@@ -988,7 +988,6 @@ def construir_docx_informe(cuerpo_informe: str, lista_graficos_selec):
     buffer.seek(0)
     return buffer
 
-
 def generar_lectura_matriz_riesgo_prioridad(pivot_riesgo: pd.DataFrame) -> str:
     """
     Genera una lectura automática a partir de la matriz Riesgo vs Prioridad.
@@ -5112,6 +5111,6 @@ with tab_plan_ia:  # ← ajusta este nombre al de tu pestaña real
 
 st.markdown("---")
 st.caption(
-    "Sistema de Gestion Operativa de calidad (control y seguimiento de incidencias)"
-    " modelo demostrativo, Neiber Vicney Mendoza" 
+    "Sistema de Gestion Operativa de calidad (control y seguimiento de incidencias ECOcero S.L)"
+    " Verion 1.0 modelo demostrativo, Neiber Vicney Mendoza" 
     )
